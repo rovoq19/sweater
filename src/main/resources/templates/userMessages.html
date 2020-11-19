@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/head :: head" />
+<body>
+	<div th:replace="blocks/navbar :: navbar" />
+
+	<div class="container mt-5">
+
+		<h3 th:text="${userChannel.username}" />
+		<div th:if="${!isCurrentUser}">
+			<a th:if="${isSubscriber}" class="btn btn-info" th:href="'/user/unsubscribe/' + ${userChannel.id}">Unsubscribe</a> <a
+				th:unless="${isSubscriber}" class="btn btn-info" th:href="'/user/subscribe/' + ${userChannel.id}">Subscribe</a>
+		</div>
+
+		<div class="container my-3">
+			<div class="row">
+				<div class="col">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-title">Subscriptions</div>
+							<h3 class="card-text">
+								<a th:href="'/user/subscriptions/' + ${userChannel.id} + '/list'" th:text="${subscriptionsCount}" />
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-title">Subscribers</div>
+							<h3 class="card-text">
+								<a th:href="'/user/subscribers/' + ${userChannel.id} + '/list'" th:text="${subscribersCount}" />
+							</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div th:if="${isCurrentUser}">
+			<div th:replace="blocks/messageEdit :: messageEdit" />
+		</div>
+
+		<div th:replace="blocks/messageList :: messageList" />
+
+	</div>
+
+	<div th:replace="blocks/jsImport :: jsImport" />
+</body>
+</html>

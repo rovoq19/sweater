@@ -1,0 +1,28 @@
+<div th:fragment="messageEdit">
+	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+		aria-controls="collapseExample"> Message editor </a>
+	<div th:class="collapse" th:classappend="${message} ? show" id="collapseExample">
+		<div class="form-group mt-3">
+			<form method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<input type="text" th:class="form-control" th:classappend="${!#strings.isEmpty(textError)} ? is-invalid"
+						th:value="${message} ? ${message.text}" name="text" placeholder="Введите сообщение" />
+					<div th:text="${!#strings.isEmpty(textError)} ? ${textError}" class="invalid-feedback" />
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" th:value="${message} ? ${message.tag}" name="tag" placeholder="Тэг">
+					<div th:text="${!#strings.isEmpty(tagError)} ? ${tagError}" class="invalid-feedback" />
+				</div>
+				<div class="form-group">
+					<div class="custom-file">
+						<input type="file" name="file" id="customFile"> <label class="custom-file-label" for="customFile">Choose file</label>
+					</div>
+				</div>
+				<input type="hidden" name="id" th:value="${message} ? ${message.id}" />
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Save message</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

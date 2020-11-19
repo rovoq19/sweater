@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/head :: head" />
+<body>
+	<div th:replace="blocks/navbar :: navbar" />
+
+	<h3 th:text="${userChannel.username}" />
+<div th:text="${type}"/>
+	<div th:each="user : ${users}">
+		<ul class="list-group">
+			<li class="list-group-item">
+			 <a th:href="'/user-messages/' + ${user.id}" th:text="${user.getUsername()}"/>
+			</li>
+		</ul>
+	</div>
+
+	<div th:replace="blocks/jsImport :: jsImport" />
+</body>
+</html>
